@@ -20,5 +20,7 @@ stackMethods.push = function(value){
 };
 
 stackMethods.pop = function(){
-  this.stackSize--;
+  if (this.stackSize > 0) {
+    this.stackSize--;
+  }
 };
