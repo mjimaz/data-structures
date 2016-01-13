@@ -12,6 +12,19 @@ var Queue = function() {
 var queueMethods = {};
 
 queueMethods.size = function() {
-  return 0;
+  return this.queueSize;
+};
+
+
+queueMethods.enqueue = function(value){
+  //this.storage[this.queueSize] = value;
+  this.queueSize++;
+};
+
+queueMethods.dequeue = function(){
+  if (this.queueSize > 0) {
+    this.queueSize--;
+    // return this.storage[this.queueSize];
+  }
 };
 
