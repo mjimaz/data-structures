@@ -2,6 +2,7 @@ var Stack = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var newStack = {};
+  newStack.stackSize = 0;
 
   _.extend(newStack, stackMethods);
 
@@ -11,7 +12,13 @@ var Stack = function() {
 var stackMethods = {};
 
 stackMethods.size = function(){
-  return 0;
+  return this.stackSize;
 };
 
+stackMethods.push = function(value){
+  this.stackSize++;
+};
 
+stackMethods.pop = function(){
+  this.stackSize--;
+};
