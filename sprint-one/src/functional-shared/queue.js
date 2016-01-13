@@ -4,6 +4,7 @@ var Queue = function() {
   var newQueue = {};
   newQueue.queueSize = 0;
   newQueue.storage = {};
+  newQueue.firstItem = 0;
   _.extend(newQueue, queueMethods);
 
   return newQueue;
@@ -17,14 +18,14 @@ queueMethods.size = function() {
 
 
 queueMethods.enqueue = function(value){
-  //this.storage[this.queueSize] = value;
+  this.storage[this.queueSize + this.firstItem] = value;
   this.queueSize++;
 };
 
 queueMethods.dequeue = function(){
   if (this.queueSize > 0) {
     this.queueSize--;
-    // return this.storage[this.queueSize];
+    return this.storage[this.firstItem++];
   }
 };
 
