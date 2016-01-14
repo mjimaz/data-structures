@@ -22,6 +22,11 @@ Graph.prototype.contains = function(node) {
 // ------------------------
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  var index = _.indexOf(this.nodes, node);
+  if (index > -1) {
+      this.nodes.splice(index, 1);
+  }
+
 };
 
 // ------------------------
