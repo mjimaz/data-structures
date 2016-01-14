@@ -9,11 +9,22 @@ var treeMethods = {};
 
 treeMethods.addChild = function(value) {
   var childTree = Tree(value);
-
   this.children.push(childTree);
 };
 
 treeMethods.contains = function(target) {
+  if (this.value === target) {
+    return true;
+  }
+  var childHasTarget = false;
+  for (var i = 0; i < this.children.length; i++) {
+    childHasTarget = this.children[i].contains(target);
+    if (childHasTarget) {
+      return true;
+    }
+    // return this.children[i].contains(target);
+  }
+  return false;
 };
 
 
@@ -21,3 +32,9 @@ treeMethods.contains = function(target) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+// addChild has constant time complexity
+
+// contains has linear time complexity because every node must be
+// visited before you can determine that a tree does NOT contain
+// the target in the worst case scenario
