@@ -23,7 +23,6 @@ treeMethods.contains = function(target) {
     if (childHasTarget) {
       return true;
     }
-    // return this.children[i].contains(target);
   }
   return false;
 };
