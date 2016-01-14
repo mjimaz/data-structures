@@ -10,3 +10,11 @@ var newStack = new Stack();
 Stack.prototype.size = function() {
   return this.stackSize;
 };
+
+Stack.prototype.push = function(value) {
+  this.stackSize++;
+};
+
+Stack.prototype.pop = function() {
+  this.stackSize--;
+};
