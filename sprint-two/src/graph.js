@@ -85,4 +85,17 @@ Graph.prototype.forEachNode = function(cb) {
  * Complexity: What is the time complexity of the above functions?
  */
 
+ // addNode has constant time complexity
 
+ // contains has linear time complexity because it uses _.indexOf
+
+ // remove has quadratic time complexity because we made sure to remove all
+ // the edges of deleted nodes.
+
+ // hasEdge has linear time complexity because it uses _.indexOf
+
+ // addEdge has linear time complexity because it uses contains
+
+ // removeEdge has linear time complexity
+
+ // forEachNode has linear time complexity because it uses _.each
