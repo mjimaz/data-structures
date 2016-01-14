@@ -28,6 +28,15 @@ Graph.prototype.removeNode = function(node) {
       this.nodes.splice(index, 1);
   }
 
+  // remove all connections of the deleted node
+  delete this.connections[node];
+  for (var nodeKey in this.connections) {
+    var nodeIndex = _.indexOf(this.connections[nodeKey], node);
+    if (nodeIndex > -1) {
+      this.connections[nodeKey].splice(nodeIndex, 1);
+    }
+  }
+
 };
 
 // ------------------------
