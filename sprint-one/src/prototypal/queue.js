@@ -16,11 +16,12 @@ queueMethods.size = function() {
 };
 
 queueMethods.enqueue = function(value) {
-  this.queueSize++;
+  this.storage[this.queueSize++ + this.firstItem] = value;
 };
 
 queueMethods.dequeue = function() {
   if (this.queueSize > 0) {
     this.queueSize--;
+    return this.storage[this.firstItem++];
   }
 };
