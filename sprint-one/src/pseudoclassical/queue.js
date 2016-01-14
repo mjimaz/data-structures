@@ -10,4 +10,12 @@ Queue.prototype.size = function(){
   return this.queueSize;
 };
 
+Queue.prototype.enqueue = function(value){
+  this.queueSize++;
+};
+
+Queue.prototype.dequeue = function(){
+  this.queueSize--;
+};
+
 var newQueue = new Queue();
