@@ -51,3 +51,13 @@ var Node = function(value) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+// addToTail() has constant time complexity because we always know
+// the location of the tail
+
+// removeHead() also has constant time complexity because we always
+// know the location of head
+
+// contains() has a time complexity that is proportionate to the number
+// of items in the list
+
