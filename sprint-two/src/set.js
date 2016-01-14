@@ -21,3 +21,8 @@ setPrototype.remove = function(item) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+ // we assume key lookups in object are constant time
+ // add has a constant time complexity
+ // contains has a constant time complexity
+ // remove has a constant time complexity
