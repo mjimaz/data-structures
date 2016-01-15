@@ -41,15 +41,14 @@ HashTable.prototype.remove = function(k) {
 };
 
 
-// Limited Array Methods:
-// get
-// set
-// each
-
-
-
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
+// Assuming that the hash function has a constant time complexity
+// insert has a constant time complexity
+// retrieve has a constant time complexity, because we know the index in the hash table
+// then we need to iterate through the array of tuplets which are insignificant 
+// in the grand scheme of the hash table operations
+// remove has a constant time complexity 
 
