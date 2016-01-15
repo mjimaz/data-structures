@@ -40,6 +40,16 @@ BinarySearchTree.treeMethods.contains = function(value){
 
 BinarySearchTree.treeMethods.depthFirstLog = function(callback){
 
+  callback(this.value);
+  if (this.left) {
+    this.left.depthFirstLog(callback);
+  }
+
+  if (this.right) {
+    this.right.depthFirstLog(callback);
+  }
+
+
 };
 
 /*
