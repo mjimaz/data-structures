@@ -9,13 +9,13 @@ HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   
   //check if item is in hashtable
-  var arrayOfBuckets = this._storage.get(index);
+  var arrayOfTuples = this._storage.get(index);
   var itemExist = false;
   //bucket is not empty
-  if(arrayOfBuckets){
+  if(arrayOfTuples){
 
     //check if item is already a tuplet
-     _.each(arrayOfBuckets, function(bucket){
+     _.each(arrayOfTuples, function(bucket){
       if(bucket[0] === k){
         bucket[1] = v;
         itemExist = true;
@@ -23,22 +23,22 @@ HashTable.prototype.insert = function(k, v) {
     });
 
     if(!itemExist){
-      arrayOfBuckets.push([k,v]);
+      arrayOfTuples.push([k,v]);
     }
-    
+
   }else{
-    arrayOfBuckets = [[k,v]];
-    this._storage.set(index, arrayOfBuckets);
+    arrayOfTuples = [[k,v]];
+    this._storage.set(index, arrayOfTuples);
   }
 };
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  var arrayOfBuckets = this._storage.get(index);
+  var arrayOfTuples = this._storage.get(index);
   var value; 
 
-  if(arrayOfBuckets){
-    _.each(arrayOfBuckets, function(bucket){
+  if(arrayOfTuples){
+    _.each(arrayOfTuples, function(bucket){
       if(bucket[0] === k){
         value = bucket[1];
       }
@@ -48,8 +48,15 @@ HashTable.prototype.retrieve = function(k) {
 };
 
 HashTable.prototype.remove = function(k) {
-  var index = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(index, undefined);
+  var bucketIndex = getIndexBelowMaxForKey(k, this._limit);
+  var arrayOfTuples = this._storage.get(bucketIndex);
+  var indexToRemove = -1;
+  _.each(arrayOfTuples, function(tuple, tupleIndex){
+
+        if(tuple[0] === k){
+          arrayOfTuples.splice(tupleIndex, 1);
+        }
+  });
 };
 
 
