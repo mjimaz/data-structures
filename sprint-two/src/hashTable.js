@@ -52,11 +52,13 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var bucketIndex = getIndexBelowMaxForKey(k, this._limit);
   var arrayOfTuples = this._storage.get(bucketIndex);
+  var removedItem;
   _.each(arrayOfTuples, function(tuple, tupleIndex){
     if(tuple[0] === k){
-      arrayOfTuples.splice(tupleIndex, 1);
+      removedItem = arrayOfTuples.splice(tupleIndex, 1);
     }
   });
+  return removedItem;
 };
 
 

@@ -1,48 +1,64 @@
-var doublyLinkedList = function() {
+var DoublyLinkedList = function() {
   this.head = null;
   this.tail = null;
 };
-  doublyLinkedList.prototype.addToTail = function(value) {
-    var node = Node(value);
-    
-    if (!list.head) {
-      list.head = node;
+
+DoublyLinkedList.prototype.addToTail = function(value) {
+  var node = new DoublyLinkedListNode(value);
+  
+  if (!this.head) {
+    this.head = node;
+  }
+  if(this.tail){
+    this.tail.next = node;
+    node.previous = this.tail;
+  }
+  this.tail = node;
+
+};
+
+DoublyLinkedList.prototype.removeHead = function() {
+  var formerHead = this.head;
+  if(this.head){
+    this.head = this.head.next;
+  }
+  return formerHead.value;
+};
+
+DoublyLinkedList.prototype.contains = function(target) {
+  var currentNode = this.head;
+
+  while(currentNode){
+    if(currentNode.value === target){
+      return true;
     }
-    if(list.tail){
-      list.tail.next = node;
-    }
-    list.tail = node;
+    currentNode = currentNode.next;
+  }
+  return false;
+};
 
-  };
+DoublyLinkedList.prototype.removeTail = function(){
 
-  doublyLinkedList.prototype.removeHead = function() {
-    var formerHead = list.head;
-    if(list.head){
-      list.head = list.head.next;
-    }
-    return formerHead.value;
-  };
+};
 
-  doublyLinkedList.prototype.contains = function(target) {
-    var currentNode = list.head;
+DoublyLinkedList.prototype.addToHead = function(value){
+  var node = new DoublyLinkedListNode(value);
+  
+  if (!this.tail) {
+    this.tail = node;
+  }
+  if(this.head){
+    this.head.previous = node;
+    node.next = this.head;
+  }
+  this.head = node;  
 
-    while(currentNode){
-      if(currentNode.value === target){
-        return true;
-      }
-      currentNode = currentNode.next;
-    }
-    return false;
-  };
+};
 
-
-var Node = function(value) {
-  var node = {};
-
-  node.value = value;
-  node.next = null;
-
-  return node;
+var DoublyLinkedListNode = function(value) {
+  this.value = value;
+  this.next = null;
+  this.previous = null;
 };
 
 /*
@@ -58,5 +74,7 @@ var Node = function(value) {
 // contains() has a time complexity that is proportionate to the number
 // of items in the list
 
+var myList = new DoublyLinkedList();
 
+myList.addToTail(6);
 
