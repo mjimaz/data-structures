@@ -10,12 +10,14 @@ HashTable.prototype.insert = function(k, v) {
   
   //check if item is in hashtable
   var arrayOfTuples = this._storage.get(index);
-  var itemExist = false;
+  
   //bucket is not empty
   if(arrayOfTuples){
 
     //check if item is already a tuplet
-     _.each(arrayOfTuples, function(bucket){
+    var itemExist = false;
+ 
+    _.each(arrayOfTuples, function(bucket){
       if(bucket[0] === k){
         bucket[1] = v;
         itemExist = true;
@@ -50,12 +52,10 @@ HashTable.prototype.retrieve = function(k) {
 HashTable.prototype.remove = function(k) {
   var bucketIndex = getIndexBelowMaxForKey(k, this._limit);
   var arrayOfTuples = this._storage.get(bucketIndex);
-  var indexToRemove = -1;
   _.each(arrayOfTuples, function(tuple, tupleIndex){
-
-        if(tuple[0] === k){
-          arrayOfTuples.splice(tupleIndex, 1);
-        }
+    if(tuple[0] === k){
+      arrayOfTuples.splice(tupleIndex, 1);
+    }
   });
 };
 
