@@ -1,9 +1,8 @@
-var LinkedList = function() {
-  var list = {};
-  list.head = null;
-  list.tail = null;
-
-  list.addToTail = function(value) {
+var doublyLinkedList = function() {
+  this.head = null;
+  this.tail = null;
+};
+  doublyLinkedList.prototype.addToTail = function(value) {
     var node = Node(value);
     
     if (!list.head) {
@@ -16,7 +15,7 @@ var LinkedList = function() {
 
   };
 
-  list.removeHead = function() {
+  doublyLinkedList.prototype.removeHead = function() {
     var formerHead = list.head;
     if(list.head){
       list.head = list.head.next;
@@ -24,7 +23,7 @@ var LinkedList = function() {
     return formerHead.value;
   };
 
-  list.contains = function(target) {
+  doublyLinkedList.prototype.contains = function(target) {
     var currentNode = list.head;
 
     while(currentNode){
@@ -36,8 +35,6 @@ var LinkedList = function() {
     return false;
   };
 
-  return list;
-};
 
 var Node = function(value) {
   var node = {};
