@@ -38,7 +38,12 @@ DoublyLinkedList.prototype.contains = function(target) {
 };
 
 DoublyLinkedList.prototype.removeTail = function(){
-
+  var formerTail = this.tail;
+  if(this.tail){
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+  }
+  return formerTail.value;
 };
 
 DoublyLinkedList.prototype.addToHead = function(value){
