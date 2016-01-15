@@ -10,10 +10,22 @@ HashTable.prototype.insert = function(k, v) {
   
   //check if item is in hashtable
   var arrayOfBuckets = this._storage.get(index);
-  
+  var itemExist = false;
   //bucket is not empty
   if(arrayOfBuckets){
-    arrayOfBuckets.push([k,v]);
+
+    //check if item is already a tuplet
+     _.each(arrayOfBuckets, function(bucket){
+      if(bucket[0] === k){
+        bucket[1] = v;
+        itemExist = true;
+      }
+    });
+
+    if(!itemExist){
+      arrayOfBuckets.push([k,v]);
+    }
+    
   }else{
     arrayOfBuckets = [[k,v]];
     this._storage.set(index, arrayOfBuckets);
