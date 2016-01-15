@@ -55,3 +55,7 @@ BinarySearchTree.treeMethods.depthFirstLog = function(callback){
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+ // insert has a log(n) time complexity
+ // contains has a log(n) time complexity
+ // depthFirstLog has n time complexity
