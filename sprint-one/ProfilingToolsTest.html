@@ -1,0 +1,33 @@
+<!doctype html>
+<meta charset="utf8">
+<html>
+  <head>
+    <style>
+      body {
+        width: 120%;
+        margin: 0;
+        padding: 0;
+      }
+      iframe {
+        width: 24%;
+        border-width: 0;
+      }
+    </style>
+    <script src="../lib/jquery/jquery.js"></script>
+    <script src="../lib/underscore/underscore.js"></script>
+    <script src="src/functional/stack.js"></script>
+    <script src="src/functional/queue.js"></script>
+    <script>
+    var stackArray = [];
+    var queueArray = [];
+    for (var i = 0; i < 100000; i++) {
+      var newStack = Stack();
+      stackArray.push(newStack);
+      var newQueue = Queue();
+      queueArray.push(newQueue);
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
