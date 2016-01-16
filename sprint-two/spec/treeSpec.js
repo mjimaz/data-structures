@@ -41,4 +41,29 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('single node tree should have null parent', function() {
+    expect(tree.parent).to.equal(null);
+  });
+
+  it('all trees that have parents should have a non null parent node', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(4);
+    tree.children[0].addChild(3);
+    expect(tree.children[0].parent).to.equal(tree);
+    expect(tree.children[0].children[1].parent).to.equal(tree.children[0]);
+  });
+
+  it('remove trees should disassociates the tree with its parent (in both directions)', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(4);
+    tree.children[0].addChild(3);
+    tree.children[1].addChild(15);
+    tree.children[1].addChild(16);
+    var removedTree = tree.children[1];
+    tree.children[1].removeFromParent();
+    expect(tree.children[1]).to.equal(undefined);
+    expect(removedTree.parent).to.equal(null); 
+  });
 });
