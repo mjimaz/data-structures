@@ -4,6 +4,9 @@ var HashTable = function() {
   this._limit = 8;
   this._tupleCount = 0;
   this._storage = LimitedArray(this._limit);
+  for (var i = 0; i < this._limit; i++) {
+    this._storage.set(i, []);
+  }
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -34,6 +37,29 @@ HashTable.prototype.insert = function(k, v) {
     arrayOfTuples = [[k,v]];
     this._storage.set(index, arrayOfTuples);
     this._tupleCount++;
+  }
+
+  // calculate % fullness
+  if (this._tupleCount/this._limit > 0.75) {
+    this._limit *= 2;
+    var newStorage = LimitedArray(this._limit);
+
+    for (var i = 0; i < this._limit; i++) {
+    newStorage.set(i, []);
+  }
+    
+    var hashPointer = this;
+
+    this._storage.each(function(arrayOfTuples){
+      var newStorageIndex;
+      _.each(arrayOfTuples, function(tupleBucket){
+        newStorageIndex = getIndexBelowMaxForKey(tupleBucket[0], hashPointer._limit);
+        
+       newStorage.get(newStorageIndex).push(tupleBucket);
+
+      });
+    });
+    this._storage = newStorage;
   }
 };
 
