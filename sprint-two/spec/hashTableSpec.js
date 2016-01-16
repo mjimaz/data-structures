@@ -83,7 +83,6 @@ describe('hashTable', function() {
     hashTable.remove('John');
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
-    console.log(hashTable);
     expect(hashTable.retrieve('Maryam')).to.equal('Aljimaz');
   });
 });

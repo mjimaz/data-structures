@@ -66,4 +66,17 @@ describe('tree', function() {
     expect(tree.children[1]).to.equal(undefined);
     expect(removedTree.parent).to.equal(null); 
   });
+
+    it('should access all nodes with callback function', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(4);
+    tree.children[0].addChild(3);
+    tree.traverse(function(){
+      this.value *=2;
+    });    
+    expect(tree.children[0].children[0].value).to.equal(8); 
+  });
+
+
 });
