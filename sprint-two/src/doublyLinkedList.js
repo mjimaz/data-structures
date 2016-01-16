@@ -1,4 +1,5 @@
 var DoublyLinkedList = function() {
+
   this.head = null;
   this.tail = null;
 };
@@ -58,6 +59,26 @@ DoublyLinkedList.prototype.addToHead = function(value){
   }
   this.head = node;  
 
+};
+
+DoublyLinkedList.prototype.findMiddle = function(head, tail){
+  if (head === null || tail === null) {
+    return null;
+  }
+
+  if(head.previous === tail || tail.next === head){
+    return null;
+  }
+
+  var left = head;
+  var right = tail;
+
+  while(left !== right && left.next !== right ){
+    left = left.next;
+    right = right.previous;
+  }
+
+  return right;
 };
 
 var DoublyLinkedListNode = function(value) {

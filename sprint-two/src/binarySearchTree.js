@@ -71,6 +71,28 @@ BinarySearchTree.treeMethods.toSortedList = function() {
   return sortedList;
 };
 
+BinarySearchTree.treeMethods.balanceTree = function(){
+  var sortedList = this.toSortedList();
+
+  function recursionBalance(head, tail){
+    
+    var middlePointer = sortedList.findMiddle(head, tail);
+    if (middlePointer === null) {
+      return null;
+    }
+    var newTree = BinarySearchTree(middlePointer.value);
+
+    newTree.left = recursionBalance(head, middlePointer.previous);
+    newTree.right = recursionBalance(middlePointer.next, tail);
+    
+    return newTree;
+  }
+  
+  return recursionBalance(sortedList.head, sortedList.tail);
+};
+
+
+
 /*
  * Complexity: What is the time complexity of the above functions?
  */

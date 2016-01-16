@@ -48,6 +48,17 @@ describe('binarySearchTree', function() {
     binarySearchTree.ascendingLog(func);
     expect(array).to.eql([3,4,5,7,10,20]);
     var sortedTree = binarySearchTree.toSortedList();
-    console.log(sortedTree);
+  });
+
+  it('should be able to balance itself', function(){
+    for (var i = 2; i < 10; i++) {
+      binarySearchTree.insert(i);
+    }
+    var bst = binarySearchTree.balanceTree();
+    expect(bst.value).to.eql(6);
+    expect(bst.left.left.left.value).to.eql(2);
+    expect(bst.right.left.value).to.eql(7);
+    
+    console.log("hi!");
   });
 });
