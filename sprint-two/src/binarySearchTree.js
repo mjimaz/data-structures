@@ -49,7 +49,26 @@ BinarySearchTree.treeMethods.depthFirstLog = function(callback){
     this.right.depthFirstLog(callback);
   }
 
+};
 
+BinarySearchTree.treeMethods.ascendingLog = function(callback){
+
+  if (this.left) {
+    this.left.ascendingLog(callback);
+  }
+  
+  callback(this.value);
+
+  if (this.right) {
+    this.right.ascendingLog(callback);
+  }
+
+};
+
+BinarySearchTree.treeMethods.toSortedList = function() {
+  var sortedList = new DoublyLinkedList();
+  this.ascendingLog(sortedList.addToTail.bind(sortedList));
+  return sortedList;
 };
 
 /*

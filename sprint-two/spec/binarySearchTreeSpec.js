@@ -36,4 +36,18 @@ describe('binarySearchTree', function() {
     binarySearchTree.depthFirstLog(func);
     expect(array).to.eql([5,2,3]);
   });
+
+  it('should execute a callback on every value in a tree using "ascendingLog"', function(){
+    var array = [];
+    var func = function(value){ array.push(value); };
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(20);
+    binarySearchTree.ascendingLog(func);
+    expect(array).to.eql([3,4,5,7,10,20]);
+    var sortedTree = binarySearchTree.toSortedList();
+    console.log(sortedTree);
+  });
 });
