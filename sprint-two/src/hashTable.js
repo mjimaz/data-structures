@@ -4,63 +4,57 @@ var HashTable = function() {
   this._limit = 8;
   this._tupleCount = 0;
   this._storage = LimitedArray(this._limit);
+
+  this.initializeBuckets(this._storage);
+};
+
+HashTable.prototype.initializeBuckets = function(storage) {
   for (var i = 0; i < this._limit; i++) {
-    this._storage.set(i, []);
+    storage.set(i, []);
   }
 };
 
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  
-  //check if item is in hashtable
   var arrayOfTuples = this._storage.get(index);
-  
-  //bucket is not empty
-  if(arrayOfTuples){
-
-    //check if item is already a tuplet
-    var itemExist = false;
+  var itemExist = false;
  
-    _.each(arrayOfTuples, function(bucket){
-      if(bucket[0] === k){
-        bucket[1] = v;
-        itemExist = true;
-      }
-    });
-
-    if(!itemExist){
-      arrayOfTuples.push([k,v]);
-      this._tupleCount++;
+  _.each(arrayOfTuples, function(bucket){
+    if(bucket[0] === k){
+      bucket[1] = v;
+      itemExist = true;
     }
+  });
 
-  }else{
-    arrayOfTuples = [[k,v]];
-    this._storage.set(index, arrayOfTuples);
+  if(!itemExist){
+    arrayOfTuples.push([k,v]);
     this._tupleCount++;
   }
 
-  // calculate % fullness
+  // rehash if hash table is too full
   if (this._tupleCount/this._limit > 0.75) {
-    this._limit *= 2;
-    var newStorage = LimitedArray(this._limit);
-
-    for (var i = 0; i < this._limit; i++) {
-    newStorage.set(i, []);
+    this.rehash(this._limit*2);
   }
-    
-    var hashPointer = this;
+};
 
-    this._storage.each(function(arrayOfTuples){
-      var newStorageIndex;
-      _.each(arrayOfTuples, function(tupleBucket){
-        newStorageIndex = getIndexBelowMaxForKey(tupleBucket[0], hashPointer._limit);
-        
-       newStorage.get(newStorageIndex).push(tupleBucket);
+HashTable.prototype.rehash = function(size){
+  this._limit = size;
+  var newStorage = LimitedArray(this._limit);
 
-      });
+  this.initializeBuckets(newStorage);
+
+  var hashPointer = this;
+
+  this._storage.each(function(arrayOfTuples){
+    var newStorageIndex;
+    _.each(arrayOfTuples, function(tupleBucket){
+      newStorageIndex = getIndexBelowMaxForKey(tupleBucket[0], hashPointer._limit);
+      
+     newStorage.get(newStorageIndex).push(tupleBucket);
+
     });
-    this._storage = newStorage;
-  }
+  });
+  this._storage = newStorage;
 };
 
 HashTable.prototype.retrieve = function(k) {
@@ -75,6 +69,7 @@ HashTable.prototype.retrieve = function(k) {
       }
     });
   }
+
   return value;
 };
 
@@ -93,6 +88,9 @@ HashTable.prototype.remove = function(k) {
     this._tupleCount--;
   }
   
+  if (this._tupleCount/this._limit < 0.25) {
+    this.rehash(Math.ceil(this._limit/2));
+  }
   return removedItem;
 };
 
