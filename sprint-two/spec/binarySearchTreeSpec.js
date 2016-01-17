@@ -52,13 +52,20 @@ describe('binarySearchTree', function() {
 
   it('should be able to balance itself', function(){
     for (var i = 2; i < 10; i++) {
-      binarySearchTree.insert(i);
+      binarySearchTree = binarySearchTree.insert(i);
     }
-    var bst = binarySearchTree.balanceTree();
-    expect(bst.value).to.eql(6);
-    expect(bst.left.left.left.value).to.eql(2);
-    expect(bst.right.left.value).to.eql(7);
-    
-    console.log("hi!");
+    expect(binarySearchTree.value).to.eql(6);
+    expect(binarySearchTree.left.left.left.value).to.eql(2);
+    expect(binarySearchTree.right.left.value).to.eql(7);    
+  });
+
+  it('depth of tree values', function(){
+    binarySearchTree.insert(4);
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(20);
+    expect(binarySearchTree.minDepth).to.eql(2);
+    expect(binarySearchTree.maxDepth).to.eql(3);  
   });
 });

@@ -25,18 +25,28 @@ describe('set', function() {
   });
 
 
-  it('should be able to handle numbers', function(){
+  it('should be able to handle numberic inputs', function(){
     set.add(2);
     set.add(3);
     expect(set.contains(2)).to.equal(true);
     expect(set.contains(3)).to.equal(true);
   });
 
-  // it('should be able to handle numbers', function(){
-  //   set.add({name: "Meryam", });
-  //   set.add(3);
-  //   expect(set.contains(2)).to.equal(true);
-  //   expect(set.contains(3)).to.equal(true);
-  // });
+  it('should be able to handle object inputs', function(){
+    var meryam = {name: "Meryam", favColor: "blue"};
+    var elliot = {name: "Elliot", favColor: "red"};
+    set.add(elliot);
+    set.add(meryam);
+    expect(set.contains(meryam)).to.equal(true);
+    expect(set.contains(elliot)).to.equal(true);
+  });
 
+  it('should be able to handle array inputs', function(){
+    var arrrrrr = [1,2,3, "a", "b", "c"];
+    var pirates = ["long", {john: "silver"}];
+    set.add(arrrrrr);
+    set.add(pirates);
+    expect(set.contains(pirates)).to.equal(true);
+    expect(set.contains(arrrrrr)).to.equal(true);
+  });
 });
